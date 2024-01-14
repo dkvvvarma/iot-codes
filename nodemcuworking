@@ -1,0 +1,30 @@
+#include <dummy.h>
+
+#include <ThingerESP8266.h>
+
+#define USERNAME "dkvvvarma"
+#define DEVIC_EID "DCEU"
+#define DEVICE_CREDENTIAL "BATMAN"
+
+#define SSID "BAT-NET"
+#define SSID_PASSWORD "BRUCEWAYNE"
+
+ThingerESP8266 thing(USERNAME, DEVIC_EID, DEVICE_CREDENTIAL);
+
+void setup() {
+  pinMode(D0, OUTPUT);
+
+  thing.add_wifi(SSID, SSID_PASSWORD);
+                          
+  // digital pin control example (i.e. turning on/off a light, a relay, configuring a parameter, etc)
+  thing["led"] << digitalPin(D0);
+
+  // resource output example (i.e. reading a sensor value)
+  thing["millis"] >> outputValue(millis());
+
+  // more details at http://docs.thinger.io/arduino/
+}
+
+void loop() {
+  thing.handle();
+}

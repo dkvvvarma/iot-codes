@@ -1,0 +1,21 @@
+const int waterSensorPin = A1; // define the analog input pin for the water sensor
+const int buzzerPin = 7; // define the digital output pin for the buzzer
+
+void setup() {
+Serial.begin(9600); // start serial communication at 9600 bps
+pinMode(waterSensorPin, INPUT); // set water sensor pin as input
+pinMode(buzzerPin, OUTPUT); // set buzzer pin as output
+}
+
+void loop() {
+int sensorValue = analogRead(waterSensorPin); // read the water sensor value
+Serial.println(sensorValue); // print the water sensor value to the serial monitor
+
+if (sensorValue < 300) { // if water level is low (less than 300)
+digitalWrite(buzzerPin, HIGH); // turn on the buzzer
+} else {
+digitalWrite(buzzerPin, LOW); // turn off the buzzer
+}
+
+delay(100); // wait for 100 milliseconds
+}
